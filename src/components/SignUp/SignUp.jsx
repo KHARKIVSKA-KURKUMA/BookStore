@@ -125,7 +125,7 @@ const SignUp = () => {
             <Form.Control
               type="username"
               id="inputUsername"
-              placeholder="Username"
+              placeholder="username"
               value={name}
               onChange={handleNameChange}
               isInvalid={usernameError}
@@ -165,7 +165,7 @@ const SignUp = () => {
           <StyledLink to={"/login"}>Авторизація</StyledLink>
         </Box>
         <Submit disabled={!isValid} type="button" onClick={handleSubmit}>
-          Надіслати
+          Реєстрація
         </Submit>
       </FormWrap>
     </Container>

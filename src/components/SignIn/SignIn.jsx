@@ -139,7 +139,7 @@ const SignIn = () => {
           <StyledLink to={"/register"}>Реєстрація</StyledLink>
         </Box>
         <Submit disabled={!isValid} type="button" onClick={handleSubmit}>
-          Надіслати
+          Увійти
         </Submit>
       </FormWrap>
     </Container>
