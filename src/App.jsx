@@ -7,11 +7,7 @@ function App() {
   return (
     <>
       <GlobalStyle />
-      <BrowserRouter
-        basename={
-          import.meta.env.DEV ? "/" : "/react-vite-project-template-js/"
-        }
-      >
+      <BrowserRouter basename={import.meta.env.DEV ? "/" : "/BookStore/"}>
         <Routes>
           <Route path="/">
             <Route index element={<HomePage />} />

@@ -9,7 +9,7 @@ export default defineConfig(({ command }) => {
   };
 
   if (command !== "serve") {
-    config.base = "/react-vite-project-template-js/";
+    config.base = "/BookStore/";
   }
 
   return config;
