@@ -1,20 +1,16 @@
-import { Link } from "react-router-dom";
 import styled from "styled-components";
+import Header from "../components/Header/Header";
 
 const Container = styled.div`
-  background-color: antiquewhite;
-  width: 100vw;
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
-  align-items: center;
+  /* padding: 0px 20px;
+  @media screen and (min-width: 768px) {
+    padding: 0px 40px;
+  } */
 `;
 const HomePage = () => {
   return (
     <Container>
-      <h1>Home page</h1>
-      <Link to="another">Link to Another Page</Link>
+      <Header />
     </Container>
   );
 };

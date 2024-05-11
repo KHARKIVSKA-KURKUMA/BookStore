@@ -1,7 +1,11 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import AboutPage from "./pages/AboutPage";
 import HomePage from "./pages/HomePage";
 import { GlobalStyle } from "./GlobalStyles";
+import AuthorPage from "./pages/AuthorPage";
+import SignInPage from "./pages/SignInPage";
+import SignUpPage from "./pages/SignUpPage";
+import Layout from "./components/Layout/Layout";
+import ClientPage from "./pages/ClientPage";
 
 function App() {
   return (
@@ -9,9 +13,12 @@ function App() {
       <GlobalStyle />
       <BrowserRouter basename={import.meta.env.DEV ? "/" : "/BookStore/"}>
         <Routes>
-          <Route path="/">
+          <Route path="/" element={<Layout />}>
             <Route index element={<HomePage />} />
-            <Route path="/another" element={<AboutPage />} />
+            <Route path="/author" element={<AuthorPage />} />
+            <Route path="/client" element={<ClientPage />} />
+            <Route path="/login" element={<SignInPage />} />
+            <Route path="/register" element={<SignUpPage />} />
           </Route>
         </Routes>
       </BrowserRouter>
