@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import Logo from "../../img/book-logo.png";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 const Wrap = styled.div`
   padding: 30px 0;
@@ -29,13 +29,28 @@ const Button = styled.button`
   }
 `;
 
+const Orders = styled(Link)`
+  color: #153448;
+  margin-right: 40px;
+`;
+
 const HeaderAuth = () => {
+  const { pathname } = useLocation();
+
   return (
     <Wrap>
       <Link to={"/"}>
         <LogoImg src={Logo} alt="Logo" />
       </Link>
-      <Button type="button">Вийти</Button>
+      <div>
+        {pathname !== "/author" && pathname !== "/client/orders" && (
+          <Orders to={"/client/orders"}>Мої замовлення</Orders>
+        )}
+        {pathname !== "/author" && pathname !== "/client" && (
+          <Orders to={"/client"}>Повернутись на головну</Orders>
+        )}
+        <Button type="button">Вийти</Button>
+      </div>
     </Wrap>
   );
 };

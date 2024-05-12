@@ -1,7 +1,13 @@
-import React from "react";
+import BookList from "../components/BookList/BookList";
+import HeaderAuth from "../components/Header/HeaderAuth";
 
 const ClientPage = () => {
-  return <div>Cl</div>;
+  return (
+    <div>
+      <HeaderAuth />
+      <BookList />
+    </div>
+  );
 };
 
 export default ClientPage;

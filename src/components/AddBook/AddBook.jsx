@@ -20,10 +20,12 @@ const Button = styled.button`
   }
 `;
 
-const AddBook = () => {
+const AddBook = ({ onOpen }) => {
   return (
     <Container>
-      <Button type="button">Додати книгу</Button>
+      <Button onClick={onOpen} type="button">
+        Додати книгу
+      </Button>
     </Container>
   );
 };

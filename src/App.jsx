@@ -6,6 +6,7 @@ import SignInPage from "./pages/SignInPage";
 import SignUpPage from "./pages/SignUpPage";
 import Layout from "./components/Layout/Layout";
 import ClientPage from "./pages/ClientPage";
+import OrdersPage from "./pages/OrdersPage";
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
             <Route index element={<HomePage />} />
             <Route path="/author" element={<AuthorPage />} />
             <Route path="/client" element={<ClientPage />} />
+            <Route path="/client/orders" element={<OrdersPage />} />
             <Route path="/login" element={<SignInPage />} />
             <Route path="/register" element={<SignUpPage />} />
           </Route>

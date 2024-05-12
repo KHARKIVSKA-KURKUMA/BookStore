@@ -1,4 +1,8 @@
 import styled from "styled-components";
+import BookItem from "../BookItem/BookItem";
+import { useState } from "react";
+import BookForm from "../BookForm/BookForm";
+import OrderForm from "../OrderForm/OrderForm";
 
 const books = [
   {
@@ -22,6 +26,7 @@ const List = styled.div`
   li {
     display: flex;
     align-items: center;
+    position: relative;
     margin-bottom: 20px;
     border: 1px solid #ccc;
     padding: 50px 20px 20px;
@@ -41,19 +46,31 @@ const List = styled.div`
 `;
 
 const BookList = () => {
+  const [isOpen, setIsOpen] = useState(false);
+  const [isOpenOrderForm, setIsOpenOrderForm] = useState(false);
+
   return (
     <List>
       <ul>
         {books.length !== 0 &&
           books.map((book) => (
-            <li key={book._id}>
-              <img src={book.link} alt={book.title} />
-              <div>
-                <p className="title">{book.title}</p>
-                <p>Мова: {book.lang}</p>
-                <p>Сторінки: {book.pages}</p>
-              </div>
-            </li>
+            <>
+              <BookItem
+                key={book._id}
+                book={book}
+                onOpen={() => setIsOpen(true)}
+                onOpenOrderForm={() => setIsOpenOrderForm(true)}
+              />
+              {isOpen && (
+                <BookForm data={book} onClose={() => setIsOpen(false)} />
+              )}
+              {isOpenOrderForm && (
+                <OrderForm
+                  bookId={book._id}
+                  onClose={() => setIsOpenOrderForm(false)}
+                />
+              )}
+            </>
           ))}
       </ul>
     </List>
