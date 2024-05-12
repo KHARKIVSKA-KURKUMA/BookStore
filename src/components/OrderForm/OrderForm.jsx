@@ -24,6 +24,9 @@ const FormWrap = styled.form`
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+  @media screen and (min-width: 768px) {
+    width: 500px;
+  }
   @media screen and (min-width: 1200px) {
     width: 600px;
   }

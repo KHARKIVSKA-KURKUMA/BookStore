@@ -1,7 +1,9 @@
 import { useState } from "react";
 import Form from "react-bootstrap/Form";
+import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
+import { logIn } from "../../store/auth/authThunks";
 
 const Container = styled.div`
   padding-bottom: 40px;
@@ -67,6 +69,7 @@ const SignIn = () => {
   const [error, setError] = useState(true);
   const [passwordError, setPasswordError] = useState(true);
   const emailRegExp = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/;
+  const dispatch = useDispatch();
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -74,7 +77,9 @@ const SignIn = () => {
       email,
       password,
     };
-    console.log("user :>> ", user);
+    dispatch(logIn(user));
+    setEmail("");
+    setPassword("");
   };
 
   const isValid =
@@ -104,7 +109,7 @@ const SignIn = () => {
 
   return (
     <Container>
-      <FormWrap>
+      <FormWrap onSubmit={handleSubmit}>
         <Title>Авторизація</Title>
         <List>
           <li>
@@ -138,7 +143,7 @@ const SignIn = () => {
           <p>Не маєте акаунту?</p>
           <StyledLink to={"/register"}>Реєстрація</StyledLink>
         </Box>
-        <Submit disabled={!isValid} type="button" onClick={handleSubmit}>
+        <Submit disabled={!isValid} type="submit">
           Увійти
         </Submit>
       </FormWrap>

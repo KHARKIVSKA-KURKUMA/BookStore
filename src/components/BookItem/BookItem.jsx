@@ -3,6 +3,11 @@ import { FaRegEdit } from "react-icons/fa";
 import { MdDelete } from "react-icons/md";
 import { useLocation } from "react-router-dom";
 import { FaBasketShopping } from "react-icons/fa6";
+import BookForm from "../BookForm/BookForm";
+import { useState } from "react";
+import OrderForm from "../OrderForm/OrderForm";
+import { useDispatch } from "react-redux";
+import { deleteBooksThunk } from "../../store/books/booksThunks";
 
 const ControlWrap = styled.div`
   position: absolute;
@@ -12,28 +17,48 @@ const ControlWrap = styled.div`
   gap: 15px;
 `;
 
-const BookItem = ({ onOpen, book, onOpenOrderForm }) => {
+const BookItem = ({ book }) => {
   const { pathname } = useLocation();
-  console.log("pathname :>> ", pathname);
+  const [isOpen, setIsOpen] = useState(false);
+  const [isOpenOrderForm, setIsOpenOrderForm] = useState(false);
+  const dispatch = useDispatch();
+
+  const handleDelete = () => {
+    const bookId = book._id;
+    dispatch(deleteBooksThunk(bookId));
+  };
   return (
-    <li key={book._id}>
-      {pathname === "/author" ? (
-        <ControlWrap>
-          <FaRegEdit size={30} onClick={onOpen} />
-          <MdDelete size={30} />
-        </ControlWrap>
-      ) : (
-        <ControlWrap>
-          <FaBasketShopping size={30} onClick={onOpenOrderForm} />
-        </ControlWrap>
+    <>
+      <li key={book._id}>
+        {pathname === "/author" ? (
+          <ControlWrap>
+            <FaRegEdit size={30} onClick={() => setIsOpen(true)} />
+            <MdDelete size={30} onClick={handleDelete} />
+          </ControlWrap>
+        ) : (
+          <ControlWrap>
+            <FaBasketShopping
+              size={30}
+              onClick={() => setIsOpenOrderForm(true)}
+            />
+          </ControlWrap>
+        )}
+        <img src={book.link} alt={book.title} />
+        <div>
+          <p className="author"> {book.author}</p>
+          <p className="title">{book.title}</p>
+          <p>Мова: {book.lang}</p>
+          <p>Сторінки: {book.pages}</p>
+        </div>
+      </li>
+      {isOpen && <BookForm data={book} onClose={() => setIsOpen(false)} />}
+      {isOpenOrderForm && (
+        <OrderForm
+          bookId={book._id}
+          onClose={() => setIsOpenOrderForm(false)}
+        />
       )}
-      <img src={book.link} alt={book.title} />
-      <div>
-        <p className="title">{book.title}</p>
-        <p>Мова: {book.lang}</p>
-        <p>Сторінки: {book.pages}</p>
-      </div>
-    </li>
+    </>
   );
 };
 

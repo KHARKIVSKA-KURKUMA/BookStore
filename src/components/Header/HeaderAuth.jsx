@@ -1,6 +1,8 @@
 import styled from "styled-components";
 import Logo from "../../img/book-logo.png";
 import { Link, useLocation } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { logOut } from "../../store/auth/authThunks";
 
 const Wrap = styled.div`
   padding: 30px 0;
@@ -36,6 +38,11 @@ const Orders = styled(Link)`
 
 const HeaderAuth = () => {
   const { pathname } = useLocation();
+  const dispatch = useDispatch();
+
+  const handleLogout = () => {
+    dispatch(logOut());
+  };
 
   return (
     <Wrap>
@@ -49,7 +56,9 @@ const HeaderAuth = () => {
         {pathname !== "/author" && pathname !== "/client" && (
           <Orders to={"/client"}>Повернутись на головну</Orders>
         )}
-        <Button type="button">Вийти</Button>
+        <Button type="button" onClick={handleLogout}>
+          Вийти
+        </Button>
       </div>
     </Wrap>
   );

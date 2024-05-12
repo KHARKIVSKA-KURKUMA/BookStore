@@ -4,6 +4,8 @@ import Form from "react-bootstrap/Form";
 import Row from "react-bootstrap/Row";
 import styled from "styled-components";
 import { SlClose } from "react-icons/sl";
+import { useDispatch } from "react-redux";
+import { postBooksThunk, putBooksThunk } from "../../store/books/booksThunks";
 
 const Backdrop = styled.div`
   position: fixed;
@@ -69,23 +71,18 @@ const BookForm = ({ data, onClose }) => {
   const [image, setImage] = useState(data !== undefined ? data.link : "");
   const [language, setLanguage] = useState(data !== undefined ? data.lang : "");
   const [pages, setPages] = useState(data !== undefined ? data.pages : "");
+  const dispatch = useDispatch();
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const newBook = { author, title, link: image, language, pages };
-    console.log(newBook);
-
+    const newBook = { author, title, link: image, lang: language, pages };
     if (isEdited) {
       const bookId = data._id;
-      console.log("оновити книгу");
+      dispatch(putBooksThunk({ bookId, newBook }));
     } else {
-      console.log("додати книгу");
+      dispatch(postBooksThunk(newBook));
     }
-    // setAuthor('');
-    // setTitle('');
-    // setImage('');
-    // setLanguage('');
-    // setPages('');
+    onClose();
   };
 
   const handlePagesChange = (e) => {
