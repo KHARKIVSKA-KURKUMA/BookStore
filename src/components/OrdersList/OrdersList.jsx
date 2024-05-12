@@ -23,6 +23,7 @@ const orders = [
     book: {
       author: "Gabriel García Márquez",
       title: "One Hundred Years of Solitude",
+      link: "https://bookclub.ua/images/db/goods/60927_120913.jpg",
     },
   },
   {
@@ -35,6 +36,7 @@ const orders = [
     book: {
       author: "Gabriel García Márquez",
       title: "One Hundred Years of Solitude",
+      link: "https://bookclub.ua/images/db/goods/60927_120913.jpg",
     },
   },
 ];
