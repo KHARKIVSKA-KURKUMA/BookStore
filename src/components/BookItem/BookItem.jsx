@@ -43,7 +43,7 @@ const BookItem = ({ book }) => {
             />
           </ControlWrap>
         )}
-        <img src={book.link} alt={book.title} />
+        <img className="img" src={book.link} alt={book.title} />
         <div>
           <p className="author"> {book.author}</p>
           <p className="title">{book.title}</p>

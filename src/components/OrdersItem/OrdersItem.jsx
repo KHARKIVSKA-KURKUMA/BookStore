@@ -1,6 +1,8 @@
 import { FaRegEdit } from "react-icons/fa";
 import { MdDelete } from "react-icons/md";
+import { useDispatch } from "react-redux";
 import styled from "styled-components";
+import { deleteOrdersThunk } from "../../store/orders/ordersThunk";
 
 const ControlWrap = styled.div`
   position: absolute;
@@ -14,10 +16,11 @@ const StyledLi = styled.li`
   border: 1px solid #ddd;
   border-radius: 5px;
   padding: 30px 20px 20px;
-  height: 200px;
+  height: 250px;
   display: flex;
   align-items: center;
   position: relative;
+  width: 400px;
 `;
 
 const OrderInfo = styled.div`
@@ -31,32 +34,36 @@ const OrderInfo = styled.div`
 `;
 
 const OrdersItem = ({ order, onOpen }) => {
+  const dispatch = useDispatch();
+  const handleDelete = () => {
+    dispatch(deleteOrdersThunk(order._id));
+  };
   return (
     <StyledLi key={order._id}>
       <ControlWrap>
         <FaRegEdit onClick={onOpen} size={30} />
-        <MdDelete size={30} />
+        <MdDelete onClick={handleDelete} size={30} />
       </ControlWrap>
       <OrderInfo>
         <img src={order.book.link} alt={order.book.title} />
         <div>
           <p>
-            <strong>Name:</strong> {order.name}
+            <strong>Ім'я:</strong> {order.name}
           </p>
           <p>
-            <strong>Surname:</strong> {order.surname}
+            <strong>Прізвище:</strong> {order.surname}
           </p>
           <p>
-            <strong>City:</strong> {order.city}
+            <strong>Місто:</strong> {order.city}
           </p>
           <p>
-            <strong>Country:</strong> {order.country}
+            <strong>Країна:</strong> {order.country}
           </p>
           <p>
-            <strong>Book Author:</strong> {order.book.author}
+            <strong>Автор:</strong> {order.book.author}
           </p>
           <p>
-            <strong>Book Title:</strong> {order.book.title}
+            <strong>Назва:</strong> {order.book.title}
           </p>
         </div>
       </OrderInfo>

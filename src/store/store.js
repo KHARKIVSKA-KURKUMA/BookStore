@@ -10,10 +10,12 @@ import {
 } from "redux-persist";
 import { persistedAuthReducer } from "./auth/authSlice";
 import { booksReducer } from "./books/booksSlice";
+import { ordersReducer } from "./orders/ordersSlice";
 
 const reducer = {
   auth: persistedAuthReducer,
   books: booksReducer,
+  orders: ordersReducer,
 };
 
 export const store = configureStore({

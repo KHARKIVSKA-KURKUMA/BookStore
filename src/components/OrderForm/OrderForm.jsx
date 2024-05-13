@@ -4,6 +4,11 @@ import Form from "react-bootstrap/Form";
 import Row from "react-bootstrap/Row";
 import styled from "styled-components";
 import { SlClose } from "react-icons/sl";
+import { useDispatch } from "react-redux";
+import {
+  postOrdersThunk,
+  putOrdersThunk,
+} from "../../store/orders/ordersThunk";
 
 const Backdrop = styled.div`
   position: fixed;
@@ -75,19 +80,23 @@ const OrderForm = ({ data, onClose, bookId }) => {
   const [country, setCountry] = useState(
     data !== undefined ? data.country : ""
   );
+  const dispatch = useDispatch();
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const newOrder = { name, surname, city, country };
-    console.log(newOrder);
     if (isEdited) {
       const orderId = data._id;
       const bookId = data.bookId;
-
-      console.log("оновити ");
+      dispatch(
+        putOrdersThunk({
+          orderId,
+          newOrder: { name, surname, city, country, bookId },
+        })
+      );
     } else {
-      console.log("додати ");
+      dispatch(postOrdersThunk({ name, surname, city, country, bookId }));
     }
+    onClose();
   };
 
   const isValid =

@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import BookItem from "../BookItem/BookItem";
+import NoDataComponent from "../NoDataComponent/NoDataComponent";
 
 const List = styled.div`
   margin-top: 20px;
@@ -26,7 +27,7 @@ const List = styled.div`
   .author {
     font-weight: 700;
   }
-  img {
+  .img {
     width: 140px;
     margin-right: 20px;
   }
@@ -40,12 +41,11 @@ const BookList = ({ books }) => {
   return (
     <List>
       <ul>
-        {books.length !== 0 &&
-          books.map((book) => (
-            <>
-              <BookItem key={book._id} book={book} />
-            </>
-          ))}
+        {books.length !== 0 ? (
+          books.map((book) => <BookItem key={book._id} book={book} />)
+        ) : (
+          <NoDataComponent />
+        )}
       </ul>
     </List>
   );
