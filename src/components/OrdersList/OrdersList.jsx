@@ -9,6 +9,7 @@ const StyledUl = styled.ul`
   padding: 0;
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
   gap: 40px;
   margin-top: 20px;
 `;
