@@ -1,7 +1,9 @@
 import { useState } from "react";
 import Form from "react-bootstrap/Form";
+import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
+import { register } from "../../store/auth/authThunks";
 
 const Container = styled.div`
   padding-bottom: 40px;
@@ -69,6 +71,7 @@ const SignUp = () => {
   const [passwordError, setPasswordError] = useState(true);
   const [usernameError, setUsernameError] = useState(true);
   const emailRegExp = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/;
+  const dispatch = useDispatch();
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -77,7 +80,10 @@ const SignUp = () => {
       password,
       name,
     };
-    console.log("user :>> ", user);
+    dispatch(register(user));
+    setEmail("");
+    setPassword("");
+    setName("");
   };
 
   const isValid =

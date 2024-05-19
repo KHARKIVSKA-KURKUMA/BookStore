@@ -12,6 +12,7 @@ import Private from "./components/Routes/Private";
 import { useDispatch } from "react-redux";
 import { useEffect } from "react";
 import { fetchCurrentUser } from "./store/auth/authThunks";
+import { ToastContainer } from "react-toastify";
 
 function App() {
   const dispatch = useDispatch();
@@ -20,6 +21,7 @@ function App() {
   }, [dispatch]);
   return (
     <>
+      <ToastContainer autoClose={2500} theme="colored" />
       <GlobalStyle />
       <BrowserRouter basename={import.meta.env.DEV ? "/" : "/BookStore/"}>
         <Routes>
